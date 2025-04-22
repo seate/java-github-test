@@ -32,18 +32,17 @@ jobs:
 
             - name: Run CodeQL Analysis
               uses: github/codeql-action/analyze@v3
-
-            - name: Run CodeQL Analysis
-              uses: github/codeql-action/analyze@v3
-
-            - name: Post CodeQL findings to PR
-              if: github.event_name == 'pull_request'
-              uses: sett-and-hive/sarif-to-comment-action@v2.0.1
               with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  repository: ${{ github.repository }}
-                  branch: ${{ github.head_ref }}
-                  pr-number: ${{ github.event.number }}
-                  sarif-file: results/codeql.sarif
-                  title: '🚨 CodeQL Security Findings'
-                  dry-run: false
+                  category: 'java-codeql-scan'
+
+            -   name: Post CodeQL findings to PR
+                if: github.event_name == 'pull_request'
+                uses: sett-and-hive/sarif-to-comment-action@v2.0.1
+                with:
+                    token: ${{ secrets.GITHUB_TOKEN }}
+                    repository: ${{ github.repository }}
+                    branch: ${{ github.head_ref }}
+                    pr-number: ${{ github.event.number }}
+                    sarif-file: results/java.sarif
+                    title: '🚨 CodeQL Security Findings'
+                    dry-run: false

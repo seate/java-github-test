@@ -44,7 +44,7 @@ jobs:
                     repository: ${{ github.repository }}
                     branch: ${{ github.head_ref }}
                     pr-number: ${{ github.event.number }}
-                    sarif-file: ${{ steps.codeql.outputs.sarif-output }}/*.sarif
+                    sarif-file: ${{ steps.codeql.outputs.sarif-output }}/java.sarif
                     title: '🚨 CodeQL Security Findings'
                     dry-run: false
                     show-rule-details: true

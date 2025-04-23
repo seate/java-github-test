@@ -20,3 +20,5 @@ jobs:
                   reporter: github-pr-review
                   fail_level: error
                   checkstyle_config: ./config/checkstyle/naver-checkstyle-rules.xml
+                  properties_file: ./config/checkstyle/checkstyle.properties
+                  workdir: './src'

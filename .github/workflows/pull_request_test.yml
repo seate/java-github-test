@@ -1,22 +1,17 @@
 name: PR Test
 
 on:
-    pull_request:
-        branches:
-          [main, develop]
-        types:
-          [opened, synchronize, reopened]
+    pull_request_target:    # 또는 pull_request
+        branches: [ main, develop ]
+        types:   [ opened, synchronize, reopened ]
 
 jobs:
     codeql:
-
-        permissions:
-            actions: read            # default action permission
-            contents: read           # code checkout permission
-            security-events: write   # code scan permission
-
-        name: “Perform CodeQL Analysis”
         runs-on: ubuntu-latest
+        permissions:
+            actions:         read
+            contents:        read
+            security-events: write
 
         steps:
             - name: Checkout repository
@@ -30,22 +25,23 @@ jobs:
             - name: Autobuild
               uses: github/codeql-action/autobuild@v3
 
-            -   name: Run CodeQL Analysis
-                id: codeql
-                uses: github/codeql-action/analyze@v3
-                with:
-                    category: 'java-codeql-scan'
+            - name: Run CodeQL Analysis
+              id: codeql
+              uses: github/codeql-action/analyze@v3
+              with:
+                  category: 'java-codeql-scan'
+                  output: results
 
-            -   name: Post CodeQL findings to PR
-                if: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
-                uses: sett-and-hive/sarif-to-comment-action@v2.0.1
-                with:
-                    token: ${{ secrets.GITHUB_TOKEN }}
-                    repository: ${{ github.repository }}
-                    branch: ${{ github.head_ref }}
-                    pr-number: ${{ github.event.number }}
-                    sarif-file: ${{ steps.codeql.outputs.sarif-output }}/java.sarif
-                    title: '🚨 CodeQL Security Findings'
-                    dry-run: false
-                    show-rule-details: true
-                    odc-sarif: false
+            - name: Post CodeQL findings to PR
+              if: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
+              uses: sett-and-hive/sarif-to-comment-action@v2.0.1
+              with:
+                  token:      ${{ secrets.GITHUB_TOKEN }}
+                  repository: ${{ github.repository }}
+                  branch:     ${{ github.head_ref }}
+                  pr-number:  ${{ github.event.number }}
+                  sarif-file: results/*.sarif
+                  title:      '🚨 CodeQL Security Findings'
+                  dry-run:    false
+                  show-rule-details: true
+                  odc-sarif:        false

@@ -1,47 +1,22 @@
 name: PR Test
 
 on:
-    pull_request_target:    # 또는 pull_request
+    pull_request:    # 또는 pull_request
         branches: [ main, develop ]
         types:   [ opened, synchronize, reopened ]
 
 jobs:
-    codeql:
+    checkstyle:
+        name: runner / checkstyle
         runs-on: ubuntu-latest
-        permissions:
-            actions:         read
-            contents:        read
-            security-events: write
-
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v3
+            - name: Checkout code
+            - uses: actions/checkout@v4
 
-            - name: Initialize CodeQL
-              uses: github/codeql-action/init@v3
+            - name: Run checkstyle
+            - uses: dbelyaev/action-checkstyle@master
               with:
-                  languages: java
-
-            - name: Autobuild
-              uses: github/codeql-action/autobuild@v3
-
-            - name: Run CodeQL Analysis
-              id: codeql
-              uses: github/codeql-action/analyze@v3
-              with:
-                  category: 'java-codeql-scan'
-                  output: results
-
-            - name: Post CodeQL findings to PR
-              if: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
-              uses: sett-and-hive/sarif-to-comment-action@v2.0.1
-              with:
-                  token:      ${{ secrets.GITHUB_TOKEN }}
-                  repository: ${{ github.repository }}
-                  branch:     ${{ github.head_ref }}
-                  pr-number:  ${{ github.event.number }}
-                  sarif-file: results/*.sarif
-                  title:      '🚨 CodeQL Security Findings'
-                  dry-run:    false
-                  show-rule-details: true
-                  odc-sarif:        false
+                  github_token: ${{ secrets.github_token }}
+                  reporter: github-pr-review
+                  fail_level: error
+                  checkstyle_config: ./config/checkstyle/naver-checkstyle-rules.xml

@@ -420,7 +420,7 @@ The following rules in the Naver coding convention cannot be checked by this con
 			<property name="allowMissingPropertyJavadoc" value="false"/>
 		</module>
 		<module name="JavadocMethod">
-			<property name="scope" value="package"/>
+			<property name="accessModifiers" value="package"/>
 			<property name="allowedAnnotations" value=""/>
 		</module>
 

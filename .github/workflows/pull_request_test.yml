@@ -11,10 +11,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
-            - uses: actions/checkout@v4
+              uses: actions/checkout@v4
 
             - name: Run checkstyle
-            - uses: dbelyaev/action-checkstyle@master
+              uses: dbelyaev/action-checkstyle@master
               with:
                   github_token: ${{ secrets.github_token }}
                   reporter: github-pr-review

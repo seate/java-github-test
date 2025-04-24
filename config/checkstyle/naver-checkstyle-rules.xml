@@ -43,6 +43,13 @@ The following rules in the Naver coding convention cannot be checked by this con
 	</module>
 
 	<!-- [line-length-120] -->
+	<module name="LineLength">
+		<property name="max" value="120"/>
+		<property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+		<message key="maxLineLen"
+				 value="[line-length-120] Line is longer than {0,number,integer} characters (found {1,number,integer})"/>
+	</module>
+
 	<module name="TreeWalker">
 		<!-- Start of Naming chapter -->
 
@@ -405,11 +412,9 @@ The following rules in the Naver coding convention cannot be checked by this con
 			<property name="scope" value="private"/>
 		</module>
 
-		<!--
 		<module name="MissingJavadocType">
 			<property name="scope" value="package"/>
 		</module>
-		-->
 
 
 		<module name="JavadocMethod">
@@ -435,13 +440,6 @@ The following rules in the Naver coding convention cannot be checked by this con
 		</module>
 	</module>
 	<property name="tabWidth" value="4"/>
-
-	<module name="LineLength">
-		<property name="max" value="120"/>
-		<property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
-		<message key="maxLineLen"
-				 value="[line-length-120] Line is longer than {0,number,integer} characters (found {1,number,integer})"/>
-	</module>
 
 	<!--- Suppression -->
 	<module name="SuppressionFilter">

@@ -21,3 +21,4 @@ jobs:
                   fail_level: warning
                   checkstyle_config: ./config/checkstyle/naver-checkstyle-rules.xml
                   properties_file: ./config/checkstyle/checkstyle.properties
+                  reviewdog_flags: '-tee'

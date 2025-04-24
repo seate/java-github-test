@@ -407,6 +407,28 @@ The following rules in the Naver coding convention cannot be checked by this con
 
 		<!-- End of Whitespace chapter -->
 
+		<!-- Start of Javadoc chapter -->
+
+		<!--
+		<module name="JavadocType"/>
+
+		<module name="MissingJavadocType">
+			<property name="scope" value="package"/>
+		</module>
+
+		-->
+
+		<module name="JavadocMethod">
+			<property name="accessModifiers" value="package"/>
+			<property name="allowedAnnotations" value=""/>
+		</module>
+		<module name="MissingJavadocMethod">
+			<property name="scope" value="package"/>
+			<property name="allowMissingPropertyJavadoc" value="false"/>
+		</module>
+
+		<!-- End of Javadoc chapter -->
+
 		<!--- Suppression -->
 		<module name="SuppressionCommentFilter">
 			<property name="offCommentFormat" value="@checkstyle:off"/>

@@ -43,6 +43,182 @@
 	</module>
 
 
+	<module name="TreeWalker">
+		<!-- Start of Naming chapter -->
+
+		<!-- [list-uppercase-abbr] -->
+		<module name="AbbreviationAsWordInName">
+			<property name="ignoreFinal" value="false"/>
+			<property name="allowedAbbreviationLength" value="1"/>
+			<message key="abbreviation.as.word"
+					 value="[list-uppercase-abbr] Abbreviation in name ''{0}'' must contain no more than {1}"/>
+			<property name="allowedAbbreviations" value="DAO,BO"/>
+		</module>
+
+		<!-- [package-lowercase] -->
+		<module name="PackageName">
+			<property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+			<message key="name.invalidPattern"
+					 value="[package-lowercase] Package name ''{0}'' must match pattern ''{1}''."/>
+		</module>
+
+
+		<!-- [class-interface-lower-camelcase] -->
+		<module name="TypeName">
+			<message key="name.invalidPattern"
+					 value="[class-interface-lower-camelcase] Type name ''{0}'' must match pattern ''{1}''."/>
+		</module>
+
+		<!-- [method-lower-camelcase] -->
+		<module name="MethodName">
+			<property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9_]*$"/>
+			<message key="name.invalidPattern"
+					 value="[method-lower-camelcase] Method name ''{0}'' must match pattern ''{1}''."/>
+		</module>
+
+		<!-- [var-lower-camelcase] -->
+		<module name="MemberName">
+			<property name="format" value="^[a-z][a-zA-Z0-9][a-zA-Z0-9]*$"/>
+			<message key="name.invalidPattern"
+					 value="[var-lower-camelcase] Member name ''{0}'' must match pattern ''{1}''."/>
+		</module>
+		<module name="ParameterName">
+			<property name="format" value="^[a-z][a-zA-Z0-9][a-zA-Z0-9]*$"/>
+			<message key="name.invalidPattern"
+					 value="[var-lower-camelcase] Parameter name ''{0}'' must match pattern ''{1}''."/>
+		</module>
+
+		<!-- [var-lower-camelcase], [avoid-1-char-var] -->
+		<module name="LocalVariableName">
+			<property name="tokens" value="VARIABLE_DEF"/>
+			<property name="format" value="^[a-z][a-zA-Z0-9][a-zA-Z0-9]*$"/>
+			<property name="allowOneCharVarInForLoop" value="true"/>
+			<message key="name.invalidPattern"
+					 value="[var-lower-camelcase][avoid-1-char-var] Local variable name ''{0}'' must match pattern ''{1}''."/>
+		</module>
+
+		<!-- End of Naming chapter -->
+
+		<!-- Start of Declarations chapter -->
+
+		<!-- [1-top-level-class] -->
+		<module name="OneTopLevelClass"/>
+		<message key="name.invalidPattern"
+				 value="[1-top-level-class] one.top.level.class=Top-level class {0} has to reside in its own source file."/>
+
+		<!-- [avoid-star-import] -->
+		<module name="AvoidStarImport">
+			<property name="allowStaticMemberImports" value="true"/>
+			<message key="import.avoidStar"
+					 value="[avoid-star-import] Using the ''.*'' form of import should be avoided - {0}."/>
+		</module>
+
+		<!-- [modifier-order] -->
+		<module name="ModifierOrder">
+			<message key="mod.order"
+					 value="[modifier-order] ''{0}'' modifier out of order with the JLS suggestions."/>
+			<message key="annotation.order"
+					 value="[modifier-order] ''{0}'' annotation modifier does not precede non-annotation modifiers."/>
+		</module>
+
+		<!-- [newline-after-annotation] -->
+		<module name="AnnotationLocation">
+			<property name="tokens" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF"/>
+			<property name="allowSamelineSingleParameterlessAnnotation" value="true"/>
+			<message key="annotation.location.alone"
+					 value="[newline-after-annotation] Annotation ''{0}'' should be alone on line."/>
+		</module>
+
+		<!-- [1-state-per-line] -->
+		<module name="OneStatementPerLine">
+			<message key="needBraces"
+					 value="[1-state-per-line] Only one statement per line allowed."/>
+		</module>
+
+		<!-- [1-var-per-declaration] -->
+		<module name="MultipleVariableDeclarations">
+			<message key="multiple.variable.declarations"
+					 value="[1-var-per-declaration] Only one variable definition per line allowed."/>
+			<message key="multiple.variable.declarations.comma"
+					 value="[1-var-per-declaration] Each variable declaration must be in its own statement."/>
+		</module>
+
+		<!-- [array-square-after-type] -->
+		<module name="ArrayTypeStyle">
+			<message key="array.type.style"
+					 value="[array-square-after-type] Array brackets at illegal position."/>
+		</module>
+
+		<!-- [long-value-suffix] -->
+		<module name="UpperEll">
+			<message key="upperEll" value="[long-value-suffix] Should use uppercase ''L''."/>
+		</module>
+
+		<!-- [special-escape] -->
+		<module name="IllegalTokenText">
+			<property name="tokens" value="STRING_LITERAL, CHAR_LITERAL"/>
+			<property name="format" value="\\u00(08|09|0(a|A)|0(c|C)|0(d|D)|22|27|5(C|c))|\\(0(10|11|12|14|15|42|47)|134)"/>
+			<property name="message" value="[array-square-after-type]  Avoid using corresponding octal or Unicode escape."/>
+		</module>
+
+		<!-- End of Declarations chapter -->
+
+		<!-- Start of Indentation chapter -->
+
+		<!-- [4-spaces-tab] -->
+		<property name="tabWidth" value="4"/>
+
+		<!-- [indentation-tab] -->
+		<module name="RegexpSinglelineJava">
+			<property name="format" value="^\t* "/>
+			<property name="message" value="[indentation-tab] Indent must use tab characters"/>
+			<property name="ignoreComments" value="true"/>
+		</module>
+
+		<!-- End of Indentation chapter -->
+
+		<!-- Start of Braces chapter -->
+
+		<!-- [braces-knr-style]-->
+		<module name="LeftCurly">
+			<message key="line.break.after"
+					 value="[braces-knr-style] ''{0}'' at column {1} should have line break after."/>
+			<message key="line.new"
+					 value="[braces-knr-style] ''{0}'' at column {1} should be on a new line."/>
+			<message key="line.previous"
+					 value="[braces-knr-style] ''{0}'' at column {1} should be on the previous line."/>
+		</module>
+		<module name="RightCurly">
+			<property name="option" value="alone"/>
+			<property name="tokens" value="CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT, INSTANCE_INIT"/>
+			<message key="line.alone"
+					 value="[braces-knr-style] ''{0}'' at column {1} should be alone on a line."/>
+			<message key="line.break.before"
+					 value="[braces-knr-style] =''{0}'' at column {1} should have line break before."/>
+			<message key="line.new"
+					 value="[braces-knr-style] ''{0}'' at column {1} should be on a new line."/>
+		</module>
+
+		<!-- [sub-flow-after-brace] -->
+		<module name="RightCurly">
+			<property name="option" value="same"/>
+			<property name="tokens" value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_DO"/>
+			<message key="line.same"
+					 value="[sub-flow-after-brace] ''{0}'' at column {1} should be on the same line as the next part of a multi-block statement (one that directly contains multiple blocks: if/else-if/else or try/catch/finally)."/>
+			<message key="line.break.before"
+					 value="[sub-flow-after-brace] ''{0}'' at column {1} should have line break before."/>
+		</module>
+
+		<!-- [need-braces] -->
+		<module name="NeedBraces">
+			<message key="needBraces"
+					 value="[need-braces] ''{0}'' statement must use '''{}'''s."/>
+		</module>
+
+		<!-- End of Braces chapter -->
+	</module>
+
+
 	<!--- Suppression -->
 	<module name="SuppressionFilter">
 		<property name="file" value="${suppressionFile}"/>

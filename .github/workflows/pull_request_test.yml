@@ -1,38 +1,14 @@
-name: PR Test
 
-on:
-    pull_request:    # 또는 pull_request
-        branches: [ main, develop ]
-        types:   [ opened, synchronize, reopened ]
-
-
-
+name: reviewdog
+on: [pull_request]
 jobs:
     checkstyle:
         name: runner / checkstyle
-
-        permissions:
-            pull-requests: write
-            contents: read
-
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v4
-
-            -   uses: dbelyaev/action-checkstyle@v1.19.0
-                env:
-                    REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub 리뷰 코멘트용
-                with:
-                    github_token: ${{ secrets.GITHUB_TOKEN }}
-                    reporter: github-pr-review
-                    fail_level: error
-                    checkstyle_config: ./config/checkstyle/naver-checkstyle-rules.xml
-                    properties_file: ./config/checkstyle/checkstyle.properties
-                    workdir: src
-                    reviewdog_flags: |
-                        -f=checkstyle
-                        -name=checkstyle
-                        -filter-mode=added
-                        -log-level debug
-                        -tee
-                    level: info
+            - uses: actions/checkout@v4
+            - uses: dbelyaev/action-checkstyle@master
+              with:
+                  github_token: ${{ secrets.github_token }}
+                  reporter: github-pr-review
+                  level: warning

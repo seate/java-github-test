@@ -41,4 +41,17 @@
 		<property name="fileExtensions" value="java"/>
 		<property name="max" value="20"/><!-- value from additional property defined in a separate property file, should be resolved -->
 	</module>
+
+
+	<!--- Suppression -->
+	<module name="SuppressionFilter">
+		<property name="file" value="${suppressionFile}"/>
+		<property name="optional" value="true"/>
+	</module>
+
+	<!--- Exclude module-info.java -->
+	<module name="BeforeExecutionExclusionFileFilter">
+		<property name="fileNamePattern" value="module\-info\.java$"/>
+	</module>
+
 </module>

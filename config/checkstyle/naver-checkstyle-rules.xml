@@ -399,6 +399,36 @@
 
 		<!-- End of Whitespace chapter -->
 
+		<!-- Start of Javadoc chapter -->
+
+		<module name="JavadocType"/>
+
+		<module name="MissingJavadocType">
+			<property name="scope" value="package"/>
+		</module>
+
+		<module name="MissingJavadocMethod">
+			<property name="scope" value="package"/>
+			<property name="allowMissingPropertyJavadoc" value="false"/>
+		</module>
+		<module name="JavadocMethod">
+			<property name="accessModifiers" value="package"/>
+			<property name="allowedAnnotations" value=""/>
+		</module>
+
+		<!-- End of Javadoc chapter -->
+
+		<!--- Suppression -->
+		<module name="SuppressionCommentFilter">
+			<property name="offCommentFormat" value="@checkstyle:off"/>
+			<property name="onCommentFormat" value="@checkstyle:on"/>
+		</module>
+		<module name="SuppressWithNearbyCommentFilter">
+			<property name="commentFormat" value="@checkstyle:ignore"/>
+			<property name="checkFormat" value=".*"/>
+			<property name="influenceFormat" value="0"/>
+		</module>
+
 	</module>
 
 

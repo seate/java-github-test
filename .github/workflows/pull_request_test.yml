@@ -5,6 +5,12 @@ jobs:
     checkstyle:
         name: runner / checkstyle
         runs-on: ubuntu-latest
+
+        permissions:
+            pull-requests: write
+            checks: write
+            contents: read
+
         steps:
             - uses: actions/checkout@v4
             - uses: dbelyaev/action-checkstyle@master

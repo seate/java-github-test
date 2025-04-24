@@ -216,6 +216,189 @@
 		</module>
 
 		<!-- End of Braces chapter -->
+
+		<!-- Start of Line-wrapping chapter -->
+
+		<!-- [1-line-package-import]-->
+		<module name="NoLineWrap">
+			<property name="tokens" value="PACKAGE_DEF, IMPORT"/>
+			<message key="no.line.wrap"
+					 value="[1-line-package-import] {0} statement should not be line-wrapped."/>
+		</module>
+
+		<!-- [block-indentation][indentation-after-line-wrapping] -->
+		<!-- checkstyle 6.16 이상을 써야지 탭을 쓸때의 인덴트 체크가 제대로 동작함 -->
+		<module name="Indentation">
+			<property name="basicOffset" value="4"/>
+			<property name="braceAdjustment" value="0"/>
+			<property name="caseIndent" value="4"/>
+			<property name="throwsIndent" value="4"/>
+			<property name="lineWrappingIndentation" value="4"/>
+			<property name="arrayInitIndent" value="4"/>
+		</module>
+
+		<!-- [line-wrapping-position] -->
+		<module name="SeparatorWrap">
+			<property name="tokens" value="COMMA"/>
+			<property name="option" value="EOL"/>
+			<message key="line.previous"
+					 value="[line-wrapping-position] ''{0}'' should be on the previous line."/>
+		</module>
+		<module name="SeparatorWrap">
+			<property name="tokens" value="DOT"/>
+			<property name="option" value="NL"/>
+			<message key="line.new"
+					 value="[line-wrapping-position] ''{0}'' should be on a new line."/>
+		</module>
+		<module name="OperatorWrap">
+			<property name="option" value="NL"/>
+			<property name="tokens" value="BAND, BOR, BSR, BXOR, DIV, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR, LT, MINUS, MOD, NOT_EQUAL, PLUS, QUESTION, SL, SR, STAR "/>
+			<message key="line.new"
+					 value="[line-wrapping-position] ''{0}'' should be on a new line."/>
+		</module>
+
+		<!-- End of Line-wrapping chapter -->
+
+		<!-- Start of Blank lines chapter -->
+
+		<!-- [blankline-after-package] -->
+		<!--
+		This module always requires an empty line between header and package.
+		But it is not forced in the Naver guide.
+		See https://github.com/checkstyle/checkstyle/issues/1035
+		<module name="EmptyLineSeparator">
+			<property name="tokens" value="PACKAGE_DEF"/>
+			<message key="empty.line.separator"
+				value="[blankline-after-package] ''{0}'' should be separated from previous statement."/>
+		</module>
+		-->
+
+		<!-- [import-grouping] -->
+		<module name="ImportOrder">
+			<property name="groups" value="java., javax., org., net., /com\.(?!nhncorp|navercorp|naver)/, /(?!java\.|javax\.|com\.|org\.|net\.)/, com.nhncorp., com.navercorp., com.naver."/>
+			<property name="ordered" value="true"/>
+			<property name="separated" value="true"/>
+			<property name="option" value="top"/>
+			<property name="sortStaticImportsAlphabetically" value="true"/>
+			<message key="import.groups.separated.internally"
+					 value="[import-grouping] Extra separation in import group before ''{0}''"/>
+			<message key="import.ordering"
+					 value="[import-grouping] Wrong order for ''{0}'' import."/>
+			<message key="import.separation"
+					 value="[import-grouping] ''{0}'' should be separated from previous imports."/>
+		</module>
+
+		<!-- [blankline-between-methods] -->
+		<module name="EmptyLineSeparator">
+			<property name="tokens" value="METHOD_DEF"/>
+			<message key="empty.line.separator"
+					 value="[blankline-between-methods] ''{0}'' should be separated from previous statement."/>
+		</module>
+
+		<!-- End of Blank lines chapter -->
+
+		<!-- Start of Whitespace chapter -->
+
+		<!-- [space-around-brace] -->
+		<module name="WhitespaceAround">
+			<property name="allowEmptyConstructors" value="true"/> <!-- [permit-concise-empty-block] -->
+			<property name="allowEmptyMethods" value="true"/>  <!-- [permit-concise-empty-block] -->
+			<property name="allowEmptyLoops" value="true"/>  <!-- [permit-concise-empty-block] -->
+			<property name="tokens" value="LCURLY, RCURLY, SLIST"/>
+			<message key="ws.notFollowed"
+					 value="[space-around-brace] ''{0}'' is not followed by whitespace."/>
+			<message key="ws.notPreceded"
+					 value="[space-around-brace] ''{0}'' is not preceded with whitespace."/>
+		</module>
+
+		<!-- [space-between-keyword-parentheses] -->
+		<module name="WhitespaceAround">
+			<property name="tokens" value="
+				DO_WHILE, LITERAL_ASSERT, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_RETURN,
+			 	LITERAL_SWITCH, LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE,"
+			/>
+			<message key="ws.notFollowed"
+					 value="[space-between-keyword-parentheses] ''{0}'' is not followed by whitespace."/>
+			<message key="ws.notPreceded"
+					 value="[space-between-keyword-parentheses] ''{0}'' is not preceded with whitespace."/>
+		</module>
+
+		<!-- [no-space-between-identifier-parentheses] -->
+		<module name="MethodParamPad">
+			<message key="line.previous"
+					 value="[no-space-between-identifier-parentheses] ''{0}'' should be on the previous line."/>
+			<message key="ws.preceded"
+					 value="[no-space-between-identifier-parentheses] ''{0}'' is preceded with whitespace."/>
+		</module>
+
+		<!-- [no-space-typecasting] -->
+		<module name="TypecastParenPad">
+			<property name="tokens" value="RPAREN,TYPECAST"/>
+			<message key="ws.followed"
+					 value="[no-space-typecasting] ''{0}'' is followed by whitespace."/>
+			<message key="ws.preceded"
+					 value="[no-space-typecasting] ''{0}'' is preceded with whitespace."/>
+		</module>
+
+		<!-- [generic-whitespace] -->
+		<module name="GenericWhitespace">
+			<message key="ws.followed"
+					 value="[generic-whitespace] ''{0}'' is followed by whitespace."/>
+			<message key="ws.preceded"
+					 value="[generic-whitespace] ''{0}'' is preceded with whitespace."/>
+			<message key="ws.illegalFollow"
+					 value="[generic-whitespace] ''{0}'' should followed by whitespace."/>
+			<message key="ws.notPreceded"
+					 value="[generic-whitespace] ''{0}'' is not preceded with whitespace."/>
+		</module>
+
+		<!-- [space-after-comma-semicolon] -->
+		<module name="WhitespaceAfter">
+			<property name="tokens" value="COMMA,SEMI"/>
+			<message key="ws.notFollowed"
+					 value="[space-after-comma-semicolon]: ''{0}'' is not followed by whitespace."/>
+		</module>
+		<module name="NoWhitespaceBefore">
+			<property name="tokens" value="COMMA,SEMI"/>
+			<message key="ws.preceded"
+					 value="[space-after-comma-semicolon] ''{0}'' is preceded with whitespace."/>
+		</module>
+
+		<!-- [space-around-colon] -->
+		<module name="WhitespaceAround">
+			<property name="tokens" value="COLON"/>
+			<property name="ignoreEnhancedForColon" value="false"/>
+			<message key="ws.notFollowed"
+					 value="[space-around-colon] ''{0}'' is not followed by whitespace."/>
+			<message key="ws.notPreceded"
+					 value="[space-around-colon] ''{0}'' is not preceded with whitespace."/>
+		</module>
+
+		<!-- [no-space-unary-operator] -->
+		<module name="NoWhitespaceBefore">
+			<property name="tokens" value="POST_INC, POST_DEC"/>
+			<message key="ws.preceded"
+					 value="[no-space-unary-operator] ''{0}'' is preceded with whitespace."/>
+		</module>
+		<module name="NoWhitespaceAfter">
+			<property name="tokens" value="INC, DEC, UNARY_MINUS, UNARY_PLUS, BNOT, LNOT"/>
+			<message key="ws.followed"
+					 value="[no-space-unary-operator] whitespace ''{0}'' is followed by whitespace."/>
+		</module>
+
+		<!-- [space-around-binary-ternary-operator] -->
+		<module name="WhitespaceAround">
+			<property name="tokens" value="ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR, BXOR_ASSIGN, DIV,
+				 DIV_ASSIGN, EQUAL, GE, GT, LAND, LE, LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL,
+				 PLUS, PLUS_ASSIGN, QUESTION, SL, SL_ASSIGN, SR, SR_ASSIGN, STAR, STAR_ASSIGN, TYPE_EXTENSION_AND"/>
+			<message key="ws.notFollowed"
+					 value="[space-around-binary-ternary-operator] ''{0}'' is not followed by whitespace."/>
+			<message key="ws.notPreceded"
+					 value="[space-around-binary-ternary-operator] ''{0}'' is not preceded with whitespace."/>
+		</module>
+
+		<!-- End of Whitespace chapter -->
+
 	</module>
 
 
